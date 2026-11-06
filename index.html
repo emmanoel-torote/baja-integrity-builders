@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baja Integrity Builders — Todos Santos, B.C.S.</title>
+<meta name="description" content="Baja Integrity Builders. Construcción residencial de alta calidad en Todos Santos, Baja California Sur. Nuevo sitio en obra.">
+<meta property="og:title" content="Baja Integrity Builders">
+<meta property="og:description" content="Construcción residencial de alta calidad en Todos Santos, B.C.S.">
+<meta name="theme-color" content="#1F2C3A">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#2A3B4C;      /* fondo del logo */
+  --navy-deep:#16212C;
+  --navy-ink:#0E161E;
+  --orange:#E8843A;    /* casa del logo */
+  --orange-hot:#F29A4A;
+  --rust:#B85C24;
+  --cream:#F1ECE4;     /* tipografía del logo */
+  --sand:#C9B79C;
+  --muted:#8C9AA8;
+  --display:'Big Shoulders Display', 'Arial Narrow', sans-serif;
+  --body:'Barlow', system-ui, sans-serif;
+  --mono:'JetBrains Mono', ui-monospace, monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--navy-ink);
+  color:var(--cream);
+  font-family:var(--body);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+
+/* ---------- ESCENA ---------- */
+.scene{position:relative;min-height:100svh;overflow:hidden;isolation:isolate}
+.sky{
+  position:absolute;inset:0;z-index:-5;
+  background:
+    radial-gradient(120% 70% at 50% 100%, rgba(232,132,58,.55) 0%, rgba(184,92,36,.25) 28%, transparent 60%),
+    linear-gradient(180deg, var(--navy-ink) 0%, var(--navy-deep) 35%, var(--navy) 70%, #6B4A3A 100%);
+}
+#fx{position:absolute;inset:0;z-index:-4;width:100%;height:100%}
+.sun{
+  position:absolute;left:72%;bottom:12vh;z-index:-3;
+  width:min(40vw,380px);aspect-ratio:1;border-radius:50%;
+  transform:translate(-50%, 0);
+  background:radial-gradient(circle at 50% 40%, #FFD2A1 0%, var(--orange-hot) 35%, var(--orange) 60%, rgba(232,132,58,0) 72%);
+  filter:blur(.5px);
+  animation:sunset 14s ease-in-out infinite alternate;
+}
+.sun::after{ /* líneas retro horizontales */
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:repeating-linear-gradient(180deg, transparent 0 58%, var(--navy-deep) 58% calc(58% + 3px), transparent calc(58% + 3px) 66%);
+  mask:linear-gradient(180deg, transparent 50%, #000 70%);
+  opacity:.75;
+}
+@keyframes sunset{from{transform:translate(-50%,0)}to{transform:translate(-50%,6vh)}}
+
+.ridge{position:absolute;left:-5%;width:110%;bottom:0;z-index:-2;will-change:transform}
+.ridge svg{display:block;width:100%;height:auto}
+.ridge.r1{bottom:14vh;opacity:.55}
+.ridge.r2{bottom:7vh}
+.ridge.r3{bottom:0}
+
+/* ---------- PISTA + BUGGY ---------- */
+.trail{position:absolute;left:0;right:0;bottom:0;height:16vh;z-index:-1;
+  background:linear-gradient(180deg, #2B2420 0%, #1A1512 100%);
+  border-top:2px solid rgba(232,132,58,.35);
+}
+.trail::before{ /* huellas */
+  content:"";position:absolute;left:0;right:0;top:38%;height:10px;
+  background:repeating-linear-gradient(90deg, rgba(201,183,156,.18) 0 18px, transparent 18px 30px);
+  animation:tracks 1.2s linear infinite;
+}
+@keyframes tracks{to{background-position:-30px 0}}
+.rig{
+  position:absolute;bottom:calc(16vh - 12px);left:0;z-index:2;
+  width:clamp(190px,22vw,300px);
+  transform:translateX(-120%);
+  animation:drive 17s cubic-bezier(.45,.05,.55,.95) 1.6s infinite;
+}
+.rig svg{width:100%;height:auto;display:block;animation:bounce .55s ease-in-out infinite alternate}
+.rig .wheel{transform-box:fill-box;transform-origin:center;animation:spin .9s linear infinite}
+.rig .boom{transform-box:view-box;transform-origin:68px 90px;animation:boom 3.4s ease-in-out infinite alternate}
+.rig .stick{transform-box:view-box;transform-origin:34px 27px;animation:stick 3.4s ease-in-out infinite alternate}
+@keyframes boom{from{transform:rotate(-4deg)}to{transform:rotate(6deg)}}
+@keyframes stick{from{transform:rotate(8deg)}to{transform:rotate(-14deg)}}
+@keyframes drive{
+  0%{transform:translateX(-120%)}
+  55%{transform:translateX(calc(100vw + 20%))}
+  100%{transform:translateX(calc(100vw + 20%))}
+}
+@keyframes bounce{from{transform:translateY(0) rotate(0)}to{transform:translateY(-2px) rotate(-.6deg)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- LAYOUT ---------- */
+.top{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:22px clamp(16px,4vw,48px);
+  position:relative;z-index:5;
+}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand svg{width:44px;height:44px}
+.brand span{font-family:var(--display);font-weight:800;letter-spacing:.12em;font-size:15px;line-height:1.05;text-transform:uppercase}
+.lang{display:flex;border:1px solid rgba(241,236,228,.25);border-radius:999px;overflow:hidden}
+.lang button{
+  background:none;border:0;color:var(--cream);font:600 12px var(--mono);
+  padding:8px 12px;cursor:pointer;letter-spacing:.08em;opacity:.55;
+}
+.lang button[aria-pressed="true"]{background:var(--orange);color:var(--navy-ink);opacity:1}
+
+.hero{
+  position:relative;z-index:4;
+  display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,5vw,80px);
+  align-items:center;
+  padding:clamp(8px,3vh,40px) clamp(16px,4vw,48px) 30vh;
+  max-width:1280px;margin:0 auto;
+}
+.eyebrow{
+  font:600 12px var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--orange);
+  display:flex;align-items:center;gap:10px;margin-bottom:18px;
+}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 0 rgba(232,132,58,.7);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 12px rgba(232,132,58,0)}100%{box-shadow:0 0 0 0 rgba(232,132,58,0)}}
+h1{
+  font-family:var(--display);font-weight:900;text-transform:uppercase;
+  font-size:clamp(56px,10.5vw,168px);line-height:.84;letter-spacing:-.01em;
+}
+h1 .line{display:block;overflow:hidden}
+h1 .line > span{display:inline-block;transform:translateY(105%);animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
+h1 .line:nth-child(2) > span{animation-delay:.12s}
+h1 .line:nth-child(3) > span{animation-delay:.24s}
+h1 .hot{color:var(--orange);-webkit-text-stroke:0}
+h1 .ghost{color:transparent;-webkit-text-stroke:2px var(--cream)}
+@keyframes rise{to{transform:translateY(0)}}
+.lede{
+  margin-top:24px;max-width:52ch;font-size:clamp(16px,1.35vw,19px);line-height:1.55;color:#D7D0C5;text-shadow:0 2px 18px rgba(14,22,30,.9);
+  opacity:0;animation:fade .8s ease .7s forwards;
+}
+.lede strong{color:var(--cream);font-weight:600}
+@keyframes fade{to{opacity:1}}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;opacity:0;animation:fade .8s ease .9s forwards}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+  font:800 15px var(--display);letter-spacing:.14em;text-transform:uppercase;
+  padding:16px 22px;border-radius:4px;transition:transform .2s, background .2s, color .2s;
+}
+.btn-primary{background:var(--orange);color:var(--navy-ink)}
+.btn-primary:hover{background:var(--orange-hot);transform:translateY(-2px)}
+.btn-ghost{border:1.5px solid rgba(241,236,228,.4)}
+.btn-ghost:hover{border-color:var(--cream);transform:translateY(-2px)}
+.btn svg{width:18px;height:18px}
+
+/* ---------- BLUEPRINT CARD ---------- */
+.board{
+  position:relative;
+  background:
+    linear-gradient(rgba(241,236,228,.06) 1px, transparent 1px) 0 0/22px 22px,
+    linear-gradient(90deg, rgba(241,236,228,.06) 1px, transparent 1px) 0 0/22px 22px,
+    rgba(22,33,44,.72);
+  border:1px solid rgba(241,236,228,.16);
+  border-radius:6px;padding:22px;
+  backdrop-filter:blur(6px);
+  box-shadow:0 30px 80px -30px rgba(0,0,0,.7);
+  transform:perspective(900px) rotateY(-6deg) rotateX(3deg);
+  transition:transform .4s ease;
+  opacity:0;animation:fade 1s ease .5s forwards;
+}
+.board:hover{transform:perspective(900px) rotateY(0) rotateX(0)}
+.board-head{display:flex;justify-content:space-between;font:600 11px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.plan{width:100%;height:auto;margin:14px 0 6px}
+.plan .stroke{fill:none;stroke:var(--cream);stroke-width:2;stroke-dasharray:1600;stroke-dashoffset:1600;animation:draw 3.2s ease .8s forwards}
+.plan .pour{fill:var(--orange);opacity:0;animation:pour 1.2s ease 3.4s forwards}
+.plan .dim{stroke:var(--orange);stroke-width:1;stroke-dasharray:3 4;fill:none;opacity:.7}
+.plan text{font:600 10px var(--mono);fill:var(--muted);letter-spacing:.08em}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pour{to{opacity:1}}
+.log{list-style:none;display:grid;gap:10px;margin-top:6px}
+.log li{display:grid;grid-template-columns:1fr auto;gap:6px 12px;font:500 13px var(--mono);align-items:center}
+.log .bar{grid-column:1/-1;height:6px;background:rgba(241,236,228,.1);border-radius:3px;overflow:hidden}
+.log .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--rust),var(--orange));border-radius:3px;transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+.log .ok{color:var(--orange)}
+.board-foot{margin-top:16px;padding-top:14px;border-top:1px dashed rgba(241,236,228,.18);display:flex;justify-content:space-between;font:400 11px var(--mono);color:var(--muted);letter-spacing:.06em}
+.blink{animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ---------- TICKER ---------- */
+.ticker{
+  position:absolute;left:0;right:0;bottom:16vh;z-index:3;
+  transform:translateY(100%);
+  background:var(--orange);color:var(--navy-ink);
+  overflow:hidden;white-space:nowrap;
+  border-block:2px solid var(--navy-ink);
+}
+.ticker-track{display:inline-flex;animation:marquee 38s linear infinite}
+.ticker span{font:800 clamp(14px,1.4vw,18px) var(--display);letter-spacing:.16em;text-transform:uppercase;padding:10px 0}
+.ticker span::after{content:"✦";margin:0 22px;opacity:.6}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ---------- FOOTER ---------- */
+.foot{
+  position:absolute;left:0;right:0;bottom:0;z-index:4;height:16vh;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:16px;
+  padding:0 clamp(16px,4vw,48px) 18px;
+  font:400 11px var(--mono);letter-spacing:.12em;color:var(--sand);text-transform:uppercase;
+  pointer-events:none;
+}
+.foot a{pointer-events:auto;text-decoration:none}
+.foot a:hover{color:var(--orange)}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;padding-bottom:34vh}
+  .board{transform:none;max-width:460px}
+  .sun{left:50%;bottom:18vh;width:70vw}
+  .brand span{font-size:13px}
+}
+@media (max-width:520px){
+  .foot{flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:4px}
+  .foot .right{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition:none!important}
+  .rig{display:none}
+  h1 .line > span{transform:none}
+  .lede,.cta,.board{opacity:1}
+  .plan .stroke{stroke-dashoffset:0}.plan .pour{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<main class="scene">
+  <div class="sky"></div>
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div class="sun" aria-hidden="true"></div>
+
+  <!-- Sierra de la Laguna, en capas -->
+  <div class="ridge r1" data-depth="8" aria-hidden="true">
+    <svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path fill="#3A4A5A" d="M0 260V170l90-40 70 22 110-78 80 46 120-92 100 70 90-30 140 86 110-60 120 52 90-38 140 70 110-44 70 26v96z"/></svg>
+  </div>
+  <div class="ridge r2" data-depth="16" aria-hidden="true">
+    <svg viewBox="0 0 1440 240" preserveAspectRatio="none"><path fill="#22303E" d="M0 240V150l120-30 80 40 140-90 90 52 130-30 70 26 150-70 110 64 120-24 100 40 150-60 100 46 80-14v140z"/>
+    <!-- cardones -->
+    <g fill="#22303E"><rect x="300" y="108" width="7" height="60" rx="3"/><rect x="290" y="126" width="6" height="22" rx="3"/><rect x="311" y="118" width="6" height="26" rx="3"/>
+    <rect x="1080" y="98" width="8" height="70" rx="4"/><rect x="1068" y="118" width="6" height="26" rx="3"/><rect x="1092" y="110" width="6" height="30" rx="3"/></g></svg>
+  </div>
+  <div class="ridge r3" data-depth="26" aria-hidden="true">
+    <svg viewBox="0 0 1440 200" preserveAspectRatio="none"><path fill="#1E1916" d="M0 200V120l160-20 140 30 180-40 160 34 200-26 180 30 160-24 140 20 120-10v106z"/></svg>
+  </div>
+
+  <div class="trail" aria-hidden="true"></div>
+
+  <!-- Retroexcavadora -->
+  <div class="rig" id="rig" aria-hidden="true">
+    <svg viewBox="0 0 300 150">
+      <!-- brazo trasero (retro) -->
+      <g class="boom">
+        <path d="M62 92 L28 30 L40 24 L74 86z" fill="#E8843A"/>
+        <rect x="40" y="46" width="5" height="34" rx="2" transform="rotate(-28 42 63)" fill="#C9B79C"/>
+        <g class="stick">
+          <path d="M30 26 L42 28 L22 100 L10 98z" fill="#D9772F"/>
+          <path d="M8 96 L28 100 L30 116 Q18 124 4 116z" fill="#0E161E"/>
+          <path d="M6 118 l3 6 M14 120 l2 6 M22 119 l1 6" stroke="#0E161E" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <circle cx="34" cy="27" r="5" fill="#0E161E"/>
+      </g>
+      <!-- estabilizador -->
+      <path d="M58 104 L44 128 H58 L68 106z" fill="#0E161E"/>
+      <!-- chasis -->
+      <path d="M54 92 H236 L242 112 H50z" fill="#0E161E"/>
+      <!-- cabina -->
+      <path d="M78 92 V40 Q78 32 86 32 H136 Q144 32 146 40 L150 92z" fill="#E8843A"/>
+      <path d="M86 40 H134 L140 86 H86z" fill="#16212C"/>
+      <path d="M88 42 H112 L114 84 H88z" fill="#F1ECE4" opacity=".14"/>
+      <rect x="110" y="40" width="4" height="46" fill="#E8843A"/>
+      <rect x="74" y="28" width="80" height="6" rx="2" fill="#0E161E"/>
+      <!-- cofre -->
+      <path d="M146 62 H222 Q232 62 234 72 L236 92 H148z" fill="#E8843A"/>
+      <path d="M160 70 H220 M160 78 H222 M160 86 H224" stroke="#B85C24" stroke-width="2.5"/>
+      <rect x="188" y="44" width="6" height="20" rx="2" fill="#0E161E"/>
+      <circle cx="232" cy="72" r="4" fill="#FFD2A1"/>
+      <!-- cargador frontal -->
+      <path d="M150 84 L250 92 L252 100 L150 96z" fill="#D9772F"/>
+      <path d="M244 82 H286 L292 120 Q268 128 244 118z" fill="#0E161E"/>
+      <path d="M248 88 H282 L286 114 Q268 120 248 114z" fill="#E8843A"/>
+      <!-- llantas -->
+      <g class="wheel"><circle cx="96" cy="118" r="28" fill="#0E161E"/><circle cx="96" cy="118" r="13" fill="#2A3B4C"/><circle cx="96" cy="118" r="6" fill="#E8843A"/>
+        <g stroke="#2A3B4C" stroke-width="4"><path d="M96 90 V98 M96 138 V146 M68 118 H76 M116 118 H124"/></g></g>
+      <g class="wheel"><circle cx="210" cy="126" r="20" fill="#0E161E"/><circle cx="210" cy="126" r="9" fill="#2A3B4C"/><circle cx="210" cy="126" r="4" fill="#E8843A"/>
+        <g stroke="#2A3B4C" stroke-width="3"><path d="M210 106 V112 M210 140 V146 M190 126 H196 M224 126 H230"/></g></g>
+    </svg>
+  </div>
+
+  <header class="top">
+    <a class="brand" href="/" aria-label="Baja Integrity Builders">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="48" fill="#2A3B4C" stroke="#F1ECE4" stroke-width="2"/>
+        <g fill="#E8843A"><path d="M20 47 L31 44 V66 H20z"/><path d="M33 38 H40 V66 H33z"/><path d="M42 43 L50 41 V66 H42z"/><path d="M52 40 L63 37 V66 H52z"/><path d="M65 46 H80 V66 H70 V55 H65z"/></g>
+      </svg>
+      <span>Baja Integrity<br>Builders</span>
+    </a>
+    <div class="lang" role="group" aria-label="Idioma">
+      <button type="button" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow"><span class="dot"></span><span data-i18n="eyebrow">Sitio en obra · Todos Santos, B.C.S.</span></p>
+      <h1>
+        <span class="line"><span data-i18n="h1a">Hecho</span></span>
+        <span class="line"><span class="ghost" data-i18n="h1b">para</span></span>
+        <span class="line"><span class="hot" data-i18n="h1c">Baja.</span></span>
+      </h1>
+      <p class="lede" data-i18n-html="lede">Estamos levantando nuestra nueva casa en línea. <strong>Las que construimos para nuestros clientes ya están de pie</strong> en Todos Santos, Pescadero y Cerritos: casas llave en mano, de la mano de arquitectos de primer nivel y con acabados que no admiten atajos.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://wa.me/52XXXXXXXXXX" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 .9c.3.2.5.2.6.4 0 .1 0 .7-.2 1.3z"/></svg>
+          <span data-i18n="cta1">Hablemos de tu proyecto</span>
+        </a>
+        <a class="btn btn-ghost" href="mailto:hola@bajaintegritybuilders.com" data-i18n="cta2">Escríbenos</a>
+      </div>
+    </div>
+
+    <aside class="board" aria-label="Avance de obra">
+      <div class="board-head"><span data-i18n="plan">Plano · Fachada</span><span>BIB-2026</span></div>
+      <svg class="plan" viewBox="0 0 340 170" aria-hidden="true">
+        <path class="dim" d="M20 150 H320 M20 145 V155 M320 145 V155"/>
+        <text x="150" y="166">12.40 m</text>
+        <g class="pour">
+          <path d="M20 62 L70 52 V140 H20z"/><path d="M76 34 H106 V140 H76z"/><path d="M112 52 L150 44 V140 H112z"/><path d="M156 44 L206 32 V140 H156z"/><path d="M212 62 H320 V140 H262 V96 H212z"/>
+        </g>
+        <path class="stroke" d="M20 62 L70 52 V140 H20z M76 34 H106 V140 H76z M112 52 L150 44 V140 H112z M156 44 L206 32 V140 H156z M212 62 H320 V140 H262 V96 H212z"/>
+      </svg>
+      <ul class="log">
+        <li><span data-i18n="s1">Cimentación</span><span class="ok">100%</span><span class="bar"><i data-w="100"></i></span></li>
+        <li><span data-i18n="s2">Estructura</span><span class="ok">100%</span><span class="bar"><i data-w="100"></i></span></li>
+        <li><span data-i18n="s3">Acabados</span><span id="pct">0%</span><span class="bar"><i data-w="82" id="finish"></i></span></li>
+      </ul>
+      <div class="board-foot"><span>23.45°N · 110.22°W</span><span><span data-i18n="eta">Entrega pronto</span><span class="blink">_</span></span></div>
+    </aside>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="ticker"></div>
+  </div>
+
+  <footer class="foot">
+    <span>© <span id="yr"></span> Baja Integrity Builders · Todos Santos, B.C.S.</span>
+    <span class="right" data-i18n="foot">Construcción residencial · Pacífico de Baja Sur</span>
+  </footer>
+</main>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* ---------- i18n ---------- */
+  const T = {
+    es:{eyebrow:'Sitio en obra · Todos Santos, B.C.S.',h1a:'Hecho',h1b:'para',h1c:'Baja.',
+      lede:'Estamos levantando nuestra nueva casa en línea. <strong>Las que construimos para nuestros clientes ya están de pie</strong> en Todos Santos, Pescadero y Cerritos: casas llave en mano, de la mano de arquitectos de primer nivel y con acabados que no admiten atajos.',
+      cta1:'Hablemos de tu proyecto',cta2:'Escríbenos',plan:'Plano · Fachada',s1:'Cimentación',s2:'Estructura',s3:'Acabados',eta:'Entrega pronto',
+      foot:'Construcción residencial · Pacífico de Baja Sur',
+      ticker:['Entrega llave en mano','Red de arquitectos de primer nivel','Estética Baja desierto','Acabados a la medida','Maquinaria propia','El dueño en cada obra','Todos Santos · Pescadero · Cerritos','Hecho para durar frente al Pacífico']},
+    en:{eyebrow:'Site under construction · Todos Santos, B.C.S.',h1a:'Built',h1b:'for',h1c:'Baja.',
+      lede:'We\u2019re framing up our new home online. <strong>The ones we build for our clients are already standing</strong> across Todos Santos, Pescadero and Cerritos: turnkey homes, shaped with top-tier architects and finished without a single shortcut.',
+      cta1:'Talk to us about your build',cta2:'Email us',plan:'Plan · Elevation',s1:'Foundation',s2:'Structure',s3:'Finishes',eta:'Delivering soon',
+      foot:'Residential construction · Baja\u2019s Pacific side',
+      ticker:['Turnkey delivery','Top-tier architect network','Baja desert aesthetic','Bespoke finishes','In-house heavy equipment','Owner on every site','Todos Santos · Pescadero · Cerritos','Built to last on the Pacific']}
+  };
+  const ticker = document.getElementById('ticker');
+  function setLang(l){
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-i18n]').forEach(el => el.textContent = T[l][el.dataset.i18n]);
+    document.querySelectorAll('[data-i18n-html]').forEach(el => el.innerHTML = T[l][el.dataset.i18nHtml]);
+    document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l));
+    const items = T[l].ticker.map(t => `<span>${t}</span>`).join('');
+    ticker.innerHTML = items + items + items + items;
+    try{ localStorage.setItem('bib-lang', l) }catch(e){}
+  }
+  let saved = null; try{ saved = localStorage.getItem('bib-lang') }catch(e){}
+  setLang(saved || ((navigator.language || 'es').slice(0,2) === 'en' ? 'en' : 'es'));
+  document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+  /* ---------- barras de avance ---------- */
+  setTimeout(() => document.querySelectorAll('.log i').forEach(i => i.style.width = i.dataset.w + '%'), 1200);
+  const pct = document.getElementById('pct');
+  let n = 0; const target = 82;
+  const tick = () => { n = Math.min(target, n + 1); pct.textContent = n + '%'; if(n < target) setTimeout(tick, 20); };
+  setTimeout(tick, 1200);
+
+  /* ---------- parallax ---------- */
+  const ridges = [...document.querySelectorAll('.ridge')];
+  let mx = 0, my = 0, cx = 0, cy = 0;
+  addEventListener('pointermove', e => { mx = e.clientX / innerWidth - .5; my = e.clientY / innerHeight - .5; });
+  if (window.DeviceOrientationEvent) addEventListener('deviceorientation', e => { if(e.gamma!=null){ mx = e.gamma/90; my = (e.beta-45)/90; } });
+
+  /* ---------- polvo + estrellas ---------- */
+  const c = document.getElementById('fx'), ctx = c.getContext('2d');
+  let W, H, dpr = Math.min(devicePixelRatio || 1, 2);
+  const stars = [], dust = [];
+  function size(){
+    W = c.width = innerWidth * dpr; H = c.height = innerHeight * dpr;
+    c.style.width = innerWidth + 'px'; c.style.height = innerHeight + 'px';
+    stars.length = 0;
+    for(let i = 0; i < 140; i++) stars.push({x:Math.random()*W, y:Math.random()*H*.55, r:Math.random()*1.3*dpr+.2, t:Math.random()*6});
+  }
+  size(); addEventListener('resize', size);
+
+  const rig = document.getElementById('rig');
+  function emitDust(){
+    const r = rig.getBoundingClientRect();
+    if (r.right < 0 || r.left > innerWidth) return;
+    const x = (r.left + r.width * .2) * dpr, y = (r.bottom - 6) * dpr;
+    for(let i = 0; i < 3; i++) dust.push({x, y, vx:-(Math.random()*1.6+.4)*dpr, vy:-(Math.random()*1.1+.2)*dpr, r:(Math.random()*8+4)*dpr, a:.45, g:Math.random()*.008+.004});
+  }
+  // polvo ambiental
+  function ambient(){ if (dust.length < 260 && Math.random() < .35) dust.push({x:-20, y:H*(.55+Math.random()*.4), vx:(Math.random()*.6+.25)*dpr, vy:-(Math.random()*.15)*dpr, r:(Math.random()*2+.6)*dpr, a:.35, g:.0015}); }
+
+  let t = 0;
+  function frame(){
+    t += .016;
+    cx += (mx - cx) * .06; cy += (my - cy) * .06;
+    ridges.forEach(el => { const d = +el.dataset.depth; el.style.transform = `translate3d(${-cx*d}px, ${-cy*d*.4}px, 0)`; });
+
+    ctx.clearRect(0,0,W,H);
+    for(const s of stars){ ctx.globalAlpha = .35 + .35*Math.sin(t*1.4 + s.t); ctx.fillStyle = '#F1ECE4'; ctx.beginPath(); ctx.arc(s.x - cx*6*dpr, s.y, s.r, 0, 7); ctx.fill(); }
+    emitDust(); ambient();
+    for(let i = dust.length - 1; i >= 0; i--){
+      const p = dust[i]; p.x += p.vx; p.y += p.vy; p.r += .25*dpr*(p.g>0.003?1:.05); p.a -= p.g;
+      if(p.a <= 0 || p.x > W + 40){ dust.splice(i,1); continue; }
+      const g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r);
+      g.addColorStop(0, `rgba(214,180,140,${p.a})`); g.addColorStop(1,'rgba(214,180,140,0)');
+      ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,7); ctx.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+  if(!reduce) requestAnimationFrame(frame); else { ctx.fillStyle='#F1ECE4'; stars.forEach(s=>{ctx.globalAlpha=.5;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,7);ctx.fill();}); }
+})();
+</script>
+</body>
+</html>
